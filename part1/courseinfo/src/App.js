@@ -63,7 +63,7 @@ const App = () => {
         coursePartsB={part2.name}
         courseExerciseB={part2.exercises}
         coursePartsC={part3.name}
-        courseExerciseC={part2.exercises}
+        courseExerciseC={part3.exercises}
       />
 
       <Total
