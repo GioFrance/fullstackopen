@@ -17,20 +17,19 @@ const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}> {text} </button>;
 };
 
-const Winner = (props) => {
-  if (props.vote === 0) {
+const Winner = ({ anecdotes, vote }) => {
+  const mostVote = Math.max(...vote);
+  const mostVoteIndex = vote.indexOf(mostVote);
+  const winner = anecdotes[mostVoteIndex];
+
+  if (mostVote === 0) {
     return (
       <div>
         <p>Please vote</p>
       </div>
     );
   }
-  return (
-    <div>
-      <p>{props.text}</p>
-      <p>has {props.vote} votes</p>
-    </div>
-  );
+  return <Info text={winner} vote={mostVote} />;
 };
 
 const App = () => {
@@ -63,13 +62,6 @@ const App = () => {
     setSelected(randomAnecdote);
   };
 
-  // const handleClickNext = () =>
-  //   setSelected(Math.floor(Math.random() * anecdotes.length));
-
-  const mostVote = Math.max(...totalVote);
-  const mostVoteIndex = totalVote.indexOf(mostVote);
-  const winner = anecdotes[mostVoteIndex];
-
   return (
     <div>
       <Header text="Anecdote of the day" />
@@ -77,7 +69,7 @@ const App = () => {
       <Button handleClick={handleClickVote} text="vote" />
       <Button handleClick={handleClickNext} text="next anecdote" />
       <Header text="Anecdote with the most votes" />
-      <Winner text={winner} vote={mostVote} />
+      <Winner anecdotes={anecdotes} vote={totalVote} />
     </div>
   );
 };
