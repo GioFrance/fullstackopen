@@ -13,17 +13,34 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [totalVote, setTotalVote] = useState(
+    new Array(anecdotes.length).fill(0)
+  );
 
-  const handleClick = () => {
+  const handleClickVote = () => {
+    const copy = [...totalVote];
+    copy[selected] += 1;
+    setTotalVote(copy);
+    console.log(copy);
+  };
+
+  const handleClickNext = () => {
     const randomAnecdote = Math.floor(Math.random() * anecdotes.length);
     console.log(randomAnecdote);
     setSelected(randomAnecdote);
   };
 
+  // const handleClickNext = () =>
+  //   setSelected(Math.floor(Math.random() * anecdotes.length));
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <button onClick={handleClick}>next anecdote</button>
+      <p>has {totalVote[selected]} votes</p>
+      <div>
+        <button onClick={handleClickVote}>vote</button>
+        <button onClick={handleClickNext}>next anecdote</button>
+      </div>
     </div>
   );
 };
