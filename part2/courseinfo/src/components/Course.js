@@ -1,46 +1,36 @@
-const Header = (props) => {
-  console.log(props);
+const Header = ({ courseName }) => {
   return (
     <div>
-      <h1>{props.courseName.name}</h1>
+      <h1>{courseName.name}</h1>
     </div>
   );
 };
 
-const Part = (props) => {
-  console.log(props);
+const Part = ({ coursePartsFinal }) => {
   return (
     <div>
       <p>
-        {props.coursePartsFinal.parts[0].name}{" "}
-        {props.coursePartsFinal.parts[0].exercises}
-      </p>
-      <p>
-        {props.coursePartsFinal.parts[1].name}{" "}
-        {props.coursePartsFinal.parts[1].exercises}
-      </p>
-      <p>
-        {props.coursePartsFinal.parts[2].name}{" "}
-        {props.coursePartsFinal.parts[2].exercises}
+        {coursePartsFinal.name} {coursePartsFinal.exercises}
       </p>
     </div>
   );
 };
 
-const Content = (props) => {
-  console.log(props);
+const Content = ({ courseParts }) => {
   return (
     <div>
-      <Part coursePartsFinal={props.courseParts} />
+      <Part coursePartsFinal={courseParts.parts[0]} />
+      <Part coursePartsFinal={courseParts.parts[1]} />
+      <Part coursePartsFinal={courseParts.parts[2]} />
     </div>
   );
 };
 
-const Course = (props) => {
+const Course = ({ course }) => {
   return (
     <div>
-      <Header courseName={props.course} />
-      <Content courseParts={props.course} />
+      <Header courseName={course} />
+      <Content courseParts={course} />
     </div>
   );
 };
