@@ -1,27 +1,34 @@
-const Header = ({ courseName }) => {
-  return (
-    <div>
-      <h1>{courseName}</h1>
-    </div>
-  );
+const H2Header = (props) => {
+  return <h2>{props.courseName}</h2>;
 };
 
-const Part = ({ coursePartsFinal }) => {
+const Part = ({ coursePartName, coursePartExercises }) => {
   return (
     <div>
       <p>
-        {coursePartsFinal.name} {coursePartsFinal.exercises}
+        {coursePartName} : {coursePartExercises}
       </p>
     </div>
   );
 };
+//OR to remove spaces
+// const Part = ({ coursePartName, coursePartExercises }) => (
+//   <div>
+//     {coursePartName}: {coursePartExercises}
+//   </div>
+// );
 
 const Content = ({ courseParts }) => {
+  console.log({ courseParts });
   return (
     <div>
-      <Part coursePartsFinal={courseParts[0]} />
-      <Part coursePartsFinal={courseParts[1]} />
-      <Part coursePartsFinal={courseParts[2]} />
+      {courseParts.map((parts) => (
+        <Part
+          key={parts.id}
+          coursePartName={parts.name}
+          coursePartExercises={parts.exercises}
+        />
+      ))}
     </div>
   );
 };
@@ -40,12 +47,12 @@ const Total = ({ courseTotal }) => {
   );
 };
 
-const Course = ({ course }) => {
+const Course = ({ courses }) => {
   return (
     <div>
-      <Header courseName={course.name} />
-      <Content courseParts={course.parts} />
-      <Total courseTotal={course.parts} />
+      <H2Header courseName={courses.name} />
+      <Content courseParts={courses.parts} />
+      <Total courseTotal={courses.parts} />
     </div>
   );
 };
