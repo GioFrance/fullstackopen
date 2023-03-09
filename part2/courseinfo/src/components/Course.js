@@ -26,11 +26,25 @@ const Content = ({ courseParts }) => {
   );
 };
 
+const Total = ({ courseTotal }) => {
+  return (
+    <div>
+      <p>
+        <b>Number of exercises </b>
+        {courseTotal.parts[0].exercises +
+          courseTotal.parts[1].exercises +
+          courseTotal.parts[2].exercises}
+      </p>
+    </div>
+  );
+};
+
 const Course = ({ course }) => {
   return (
     <div>
       <Header courseName={course} />
       <Content courseParts={course} />
+      <Total courseTotal={course} />
     </div>
   );
 };
