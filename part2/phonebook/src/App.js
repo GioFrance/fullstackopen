@@ -1,61 +1,9 @@
 import { useState } from "react";
-
-const H1Header = ({ header1 }) => {
-  return <h1>{header1}</h1>;
-};
-
-const H2Header = ({ text }) => {
-  return <h3>{text}</h3>;
-};
-
-const Filter = ({ filter, handleChange }) => {
-  return (
-    <div>
-      filter shown with:
-      <input value={filter} onChange={handleChange} />
-    </div>
-  );
-};
-
-const PersonForm = ({
-  addPhonebook,
-  newName,
-  handlePhonebookChange,
-  number,
-  handleNumberChange,
-}) => {
-  return (
-    <form onSubmit={addPhonebook}>
-      <div>
-        name:
-        <input value={newName} onChange={handlePhonebookChange} />
-      </div>
-      <div>
-        number:
-        <input value={number} onChange={handleNumberChange} />
-      </div>
-      <div>
-        <button type="submit">add</button>
-      </div>
-    </form>
-  );
-};
-
-const Persons = ({ persons, showFilter }) => {
-  return (
-    <div>
-      {persons
-        .filter((person) =>
-          person.name.toLowerCase().includes(showFilter.toLowerCase())
-        )
-        .map((person) => (
-          <p key={person.id}>
-            {person.name} {person.number}
-          </p>
-        ))}
-    </div>
-  );
-};
+import H1Header from "./components/H1Header";
+import H2Header from "./components/H2Header";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -77,15 +25,17 @@ const App = () => {
       id: persons.length + 1,
     };
 
-    const nameFinder = persons.find(
-      (person) => person.name === phonebookObject.name
+    persons.find((person) =>
+      person.name === phonebookObject.name
+        ? alert(`${newName} is already added to phonebook`)
+        : setPersons(persons.concat(phonebookObject))
     );
-
-    if (nameFinder) {
-      alert(`${newName} is already added to phonebook`);
-    } else {
-      setPersons(persons.concat(phonebookObject));
-    }
+    //  OR
+    // if (nameFinder) {
+    //   alert(`${newName} is already added to phonebook`);
+    // } else {
+    //   setPersons(persons.concat(phonebookObject));
+    // }
     setNewName("");
     setNumber("");
   };
@@ -93,14 +43,10 @@ const App = () => {
   const handleFilterChange = (event) => {
     setShowFilter(event.target.value);
   };
-
   const handlePhonebookChange = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
   };
-
   const handleNumberChange = (event) => {
-    console.log(event.target.value);
     setNumber(event.target.value);
   };
 
@@ -123,8 +69,5 @@ const App = () => {
     </div>
   );
 };
-
-// filter === ''  ? persons : persons.filter(person =>
-//   person.name.toLowerCase().includes(filter.toLowerCase()))
 
 export default App;
