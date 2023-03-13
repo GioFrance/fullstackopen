@@ -29,6 +29,7 @@ const App = () => {
         <div>
           <button type="submit">add</button>
         </div>
+        <div>debug: {newName}</div>
       </form>
       <h2>Numbers</h2>
       {persons.map((person) => (
