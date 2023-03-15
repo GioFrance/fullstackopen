@@ -14,13 +14,10 @@ const App = () => {
   const titleMain = "Phonebook";
 
   useEffect(() => {
-    console.log("effect");
     axios.get("http://localhost:3001/persons").then((response) => {
-      console.log("promise fulfilled");
       setPersons(response.data);
     });
   }, []);
-  console.log("render", persons.length, "persons");
 
   const addPhonebook = (event) => {
     event.preventDefault();
@@ -35,12 +32,7 @@ const App = () => {
         ? alert(`${newName} is already added to phonebook`)
         : setPersons(persons.concat(phonebookObject))
     );
-    //  OR
-    // if (nameFinder) {
-    //   alert(`${newName} is already added to phonebook`);
-    // } else {
-    //   setPersons(persons.concat(phonebookObject));
-    // }
+
     setNewName("");
     setNumber("");
   };
