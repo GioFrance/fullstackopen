@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import H1Header from "./components/H1Header";
 import H2Header from "./components/H2Header";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import phonebookServices from "./services/phonebook";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -14,7 +14,7 @@ const App = () => {
   const titleMain = "Phonebook";
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
+    phonebookServices.getAll().then((response) => {
       setPersons(response.data);
     });
   }, []);
@@ -26,8 +26,8 @@ const App = () => {
       number: number,
     };
 
-    axios
-      .post("http://localhost:3001/persons", phonebookObject)
+    phonebookServices
+      .create(phonebookObject)
       .then(
         persons.find((person) =>
           person.name === phonebookObject.name
