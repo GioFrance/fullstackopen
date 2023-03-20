@@ -27,11 +27,15 @@ const App = () => {
       id: persons.length + 1,
     };
 
-    persons.find((person) =>
-      person.name === phonebookObject.name
-        ? alert(`${newName} is already added to phonebook`)
-        : setPersons(persons.concat(phonebookObject))
-    );
+    axios
+      .post("http://localhost:3001/persons", phonebookObject)
+      .then(
+        persons.find((person) =>
+          person.name === phonebookObject.name
+            ? alert(`${newName} is already added to phonebook`)
+            : setPersons(persons.concat(phonebookObject))
+        )
+      );
 
     setNewName("");
     setNumber("");
