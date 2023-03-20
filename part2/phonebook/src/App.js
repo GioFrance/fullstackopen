@@ -15,6 +15,7 @@ const App = () => {
 
   useEffect(() => {
     phonebookServices.getAll().then((initialPersons) => {
+      console.log(initialPersons);
       setPersons(initialPersons);
     });
   }, []);
@@ -40,9 +41,8 @@ const App = () => {
     setNumber("");
   };
 
-  const deletePhonebook = (id) => {
-    const person = persons.find((n) => n.id === id);
-    if (window.confirm(`Delete ${person.name}`)) {
+  const deletePhonebook = (id, name) => {
+    if (window.confirm(`Delete ${name}`)) {
       phonebookServices.remove(id).then((returnedPerson) => {
         persons.map((person) => (person.id !== id ? person : returnedPerson));
       });
