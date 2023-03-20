@@ -24,7 +24,6 @@ const App = () => {
     const phonebookObject = {
       name: newName,
       number: number,
-      id: persons.length + 1,
     };
 
     axios
