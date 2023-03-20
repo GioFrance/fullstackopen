@@ -9,6 +9,7 @@ const create = (phonebookObject) => {
   return axios.post(baseUrl, phonebookObject);
 };
 
+// eslint-disable-next-line
 export default {
   getAll: getAll,
   create: create,
