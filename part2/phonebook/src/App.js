@@ -41,7 +41,8 @@ const App = () => {
   };
 
   const deletePhonebook = (id) => {
-    if (window.confirm("Delete")) {
+    const person = persons.find((n) => n.id === id);
+    if (window.confirm(`Delete ${person.name}`)) {
       phonebookServices.remove(id).then((returnedPerson) => {
         persons.map((person) => (person.id !== id ? person : returnedPerson));
       });
