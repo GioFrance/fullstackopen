@@ -14,8 +14,8 @@ const App = () => {
   const titleMain = "Phonebook";
 
   useEffect(() => {
-    phonebookServices.getAll().then((response) => {
-      setPersons(response.data);
+    phonebookServices.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
     });
   }, []);
 
@@ -38,6 +38,15 @@ const App = () => {
 
     setNewName("");
     setNumber("");
+  };
+
+  const deletePhonebook = (id) => {
+    if (window.confirm("Delete")) {
+      phonebookServices.remove(id).then((returnedPerson) => {
+        persons.map((person) => (person.id !== id ? person : returnedPerson));
+      });
+      setPersons(persons.filter((person) => person.id !== id));
+    }
   };
 
   const handleFilterChange = (event) => {
@@ -65,7 +74,11 @@ const App = () => {
       />
 
       <H2Header text="Numbers" />
-      <Persons persons={persons} showFilter={showFilter} />
+      <Persons
+        persons={persons}
+        showFilter={showFilter}
+        deletePerson={deletePhonebook}
+      />
     </div>
   );
 };
