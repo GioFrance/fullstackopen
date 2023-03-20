@@ -1,3 +1,11 @@
+const PersonList = ({ personRef }) => {
+  return (
+    <p>
+      {personRef.name} {personRef.number}
+    </p>
+  );
+};
+
 const Persons = ({ persons, showFilter }) => {
   return (
     <div>
@@ -6,9 +14,7 @@ const Persons = ({ persons, showFilter }) => {
           person.name.toLowerCase().includes(showFilter.toLowerCase())
         )
         .map((person) => (
-          <p key={person.id}>
-            {person.name} {person.number}
-          </p>
+          <PersonList key={person.name} personRef={person} />
         ))}
     </div>
   );
