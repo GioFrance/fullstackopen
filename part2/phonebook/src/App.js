@@ -39,11 +39,12 @@ const App = () => {
     ) {
       alert(`${newName} is already added to phonebook`);
     } else {
-      setPersons(persons.concat(phonebookObject));
+      phonebookServices.create(phonebookObject).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNewName("");
+        setNumber("");
+      });
     }
-
-    setNewName("");
-    setNumber("");
   };
 
   const deletePhonebook = (id, name) => {
