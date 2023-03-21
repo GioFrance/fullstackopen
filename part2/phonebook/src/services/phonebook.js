@@ -32,6 +32,8 @@ export default {
 // const exportDefault = {
 //     getAll,
 //     create,
+//     remove,
+//     update,
 // }
 
 // export default exportDefault;

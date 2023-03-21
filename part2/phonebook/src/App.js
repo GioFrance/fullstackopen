@@ -27,15 +27,20 @@ const App = () => {
       number: number,
     };
 
-    phonebookServices
-      .create(phonebookObject)
-      .then(
-        persons.find((person) =>
-          person.name === phonebookObject.name
-            ? alert(`${newName} is already added to phonebook`)
-            : setPersons(persons.concat(phonebookObject))
-        )
-      );
+    // const checkPerson = persons.find(
+    //   (person) =>
+    //     person.name.toLowerCase() === phonebookObject.name.toLowerCase()
+    // );
+    if (
+      persons.find(
+        (person) =>
+          person.name.toLowerCase() === phonebookObject.name.toLowerCase()
+      )
+    ) {
+      alert(`${newName} is already added to phonebook`);
+    } else {
+      setPersons(persons.concat(phonebookObject));
+    }
 
     setNewName("");
     setNumber("");
