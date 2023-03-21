@@ -33,24 +33,24 @@ const App = () => {
     );
 
     if (currentPerson && currentPerson.number === number) {
-      alert(`${newName} is already added to phonebook`);
-    } else if (currentPerson && currentPerson.number !== number) {
+      window.alert(`${newName} is already added to phonebook`);
+    }
+    if (currentPerson && currentPerson.number !== number) {
       const confirmReplace = window.confirm(
         `Replace ${currentPerson.name} number with new number?`
       );
-
-      if (confirmReplace) {
-        const personUpdate = { ...currentPerson, number: number };
-        phonebookServices
-          .update(currentPerson.id, personUpdate)
-          .then((returnedPerson) => {
-            setPersons(
-              persons.map((person) =>
-                person.id !== currentPerson.id ? person : returnedPerson
-              )
-            );
-          });
-      }
+    }
+    if (confirmReplace) {
+      const personUpdate = { ...currentPerson, number: number };
+      phonebookServices
+        .update(currentPerson.id, personUpdate)
+        .then((returnedPerson) => {
+          setPersons(
+            persons.map((person) =>
+              person.id !== currentPerson.id ? person : returnedPerson
+            )
+          );
+        });
     } else {
       phonebookServices.create(phonebookObject).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
