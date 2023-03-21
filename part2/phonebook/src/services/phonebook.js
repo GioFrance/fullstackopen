@@ -16,11 +16,17 @@ const remove = (id) => {
   return request.then((response) => response.data);
 };
 
+const update = (id, phonebookObject) => {
+  const request = axios.put(`${baseUrl}/${id}`, phonebookObject);
+  return request.then((response) => response.data);
+};
+
 // eslint-disable-next-line
 export default {
   getAll: getAll,
   create: create,
   remove: remove,
+  update: update,
 };
 
 // const exportDefault = {
