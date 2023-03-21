@@ -11,29 +11,16 @@ const create = (phonebookObject) => {
   return request.then((response) => response.data);
 };
 
-const remove = (id) => {
-  const request = axios.delete(`${baseUrl}/${id}`);
-  return request.then((response) => response.data);
-};
-
 const update = (id, phonebookObject) => {
   const request = axios.put(`${baseUrl}/${id}`, phonebookObject);
   return request.then((response) => response.data);
 };
 
-// eslint-disable-next-line
-export default {
-  getAll: getAll,
-  create: create,
-  remove: remove,
-  update: update,
+const remove = (id) => {
+  const request = axios.delete(`${baseUrl}/${id}`);
+  return request.then((response) => response.data);
 };
 
-// const exportDefault = {
-//     getAll,
-//     create,
-//     remove,
-//     update,
-// }
+const exportDefault = { getAll, create, remove, update };
 
-// export default exportDefault;
+export default exportDefault;
