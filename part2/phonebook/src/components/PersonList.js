@@ -3,8 +3,7 @@ const PersonList = ({ personRef, deletePerson }) => {
     <p>
       {personRef.name} {personRef.number}
       <button onClick={() => deletePerson(personRef.id, personRef.name)}>
-        {" "}
-        delete{" "}
+        delete
       </button>
     </p>
   );
