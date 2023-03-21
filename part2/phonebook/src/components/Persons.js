@@ -9,7 +9,7 @@ const Persons = ({ persons, showFilter, deletePerson }) => {
         )
         .map((person) => (
           <PersonList
-            key={person.name}
+            key={person.id}
             personRef={person}
             deletePerson={deletePerson}
           />
