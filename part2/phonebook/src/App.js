@@ -59,24 +59,43 @@ const App = () => {
                 person.id !== currentPerson.id ? person : returnedPerson
               )
             );
-          });
+            setMessage(`'${currentPerson.name}' number has been updated`);
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
+          })
 
-        setMessage(`'${currentPerson.name}' number has been updated`);
-        setTimeout(() => {
-          setMessage(null);
-        }, 5000);
+          .catch((error) => {
+            console.log("fail");
+            setMessage(
+              `'${currentPerson.name}' was already removed from server`
+            );
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
+            setPersons(
+              persons.filter((person) => person.name !== currentPerson.name)
+            );
+          });
       }
     }
     if (!currentPerson) {
-      phonebookServices.create(phonebookObject).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-      });
+      phonebookServices
+        .create(phonebookObject)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+        })
+        .catch((error) => {
+          setMessage(error.response.data.error);
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000);
+        });
       setMessage(`'${phonebookObject.name}' has been added to contacts`);
       setTimeout(() => {
         setMessage(null);
       }, 5000);
     }
-
     setNewName("");
     setNumber("");
   };
