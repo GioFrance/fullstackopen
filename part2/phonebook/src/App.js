@@ -71,6 +71,10 @@ const App = () => {
       phonebookServices.create(phonebookObject).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
       });
+      setMessage(`'${phonebookObject.name}' has been added to contacts`);
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
     }
 
     setNewName("");
@@ -83,6 +87,10 @@ const App = () => {
         persons.map((person) => (person.id !== id ? person : returnedPerson));
       });
       setPersons(persons.filter((person) => person.id !== id));
+      setMessage(`'${name}' has been deleted`);
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
     }
   };
 
