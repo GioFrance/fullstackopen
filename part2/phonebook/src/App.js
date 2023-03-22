@@ -8,7 +8,7 @@ import phonebookServices from "./services/phonebook";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("...type a name");
+  const [newName, setNewName] = useState("");
   const [number, setNumber] = useState("");
   const [showFilter, setShowFilter] = useState("");
   const titleMain = "Phonebook";
@@ -33,7 +33,7 @@ const App = () => {
     );
 
     if (currentPerson && currentPerson.number === number) {
-      window.alert(`${newName} is already added to phonebook`);
+      alert(`${newName} is already added to phonebook`);
     }
 
     if (currentPerson && currentPerson.number !== number) {
@@ -53,11 +53,13 @@ const App = () => {
             );
           });
       }
-    } else {
+    }
+    if (!currentPerson) {
       phonebookServices.create(phonebookObject).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
       });
     }
+
     setNewName("");
     setNumber("");
   };

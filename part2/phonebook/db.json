@@ -2,7 +2,7 @@
   "persons": [
     {
       "name": "Arto Hellas",
-      "number": "13213-212",
+      "number": "12313",
       "id": 1
     },
     {
@@ -21,14 +21,9 @@
       "id": 4
     },
     {
-      "name": "James Bond",
-      "number": "045285-007",
+      "name": "Gio Fra",
+      "number": "1243",
       "id": 5
-    },
-    {
-      "name": "Gio Fra ",
-      "number": "131331",
-      "id": 6
     }
   ]
 }
