@@ -6,11 +6,19 @@ import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import phonebookServices from "./services/phonebook";
 
+const Notification = ({ message }) => {
+  if (message === null) {
+    return null;
+  }
+  return <div className="error">{message}</div>;
+};
+
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [number, setNumber] = useState("");
   const [showFilter, setShowFilter] = useState("");
+  const [message, setMessage] = useState("some message here");
   const titleMain = "Phonebook";
 
   useEffect(() => {
@@ -52,6 +60,11 @@ const App = () => {
               )
             );
           });
+
+        setMessage(`'${currentPerson.name}' number has been updated`);
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
       }
     }
     if (!currentPerson) {
@@ -86,6 +99,7 @@ const App = () => {
   return (
     <div>
       <H1Header header1={titleMain} />
+      <Notification message={message} />
       <Filter filter={showFilter} handleChange={handleFilterChange} />
 
       <H2Header text="Add New Contact" />
