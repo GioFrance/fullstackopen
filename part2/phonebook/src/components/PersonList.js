@@ -1,11 +1,11 @@
 const PersonList = ({ personRef, deletePerson }) => {
   return (
-    <p>
+    <li className="persons">
       {personRef.name} {personRef.number}
       <button onClick={() => deletePerson(personRef.id, personRef.name)}>
         delete
       </button>
-    </p>
+    </li>
   );
 };
 
