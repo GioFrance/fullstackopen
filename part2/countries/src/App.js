@@ -1,6 +1,30 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const Filter = ({ filter, handleFilter }) => {
+  return (
+    <div>
+      <form>
+        <div>
+          name of country : <input value={filter} onChange={handleFilter} />
+        </div>
+      </form>
+    </div>
+  );
+};
+
+const Countries = ({ countries, countriesToShow }) => (
+  <div>
+    {/* {countriesToShow.filter((country) =>
+      country.name.common.toLowerCase().includes(filter.toLowerCase())
+    )}
+    ; */}
+    {countries.map((country) => (
+      <li key={country.name.official}>{country.name.common}</li>
+    ))}
+  </div>
+);
+
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [filter, setFilter] = useState("");
@@ -24,14 +48,8 @@ const App = () => {
   return (
     <div>
       <h1>Countries</h1>
-      <div>
-        name of country: <input value={filter} onChange={handleFilter} />
-      </div>
-      <div>
-        {countries.map((country) => (
-          <li key={country.name.official}>{country.name.common}</li>
-        ))}
-      </div>
+      <Filter filter={filter} handleFilter={handleFilter} />
+      <Countries countries={countries} countriesToShow={countriesToShow} />
     </div>
   );
 };
