@@ -26,10 +26,27 @@ const Countries = ({ countries, showFilter }) => {
     );
   }
 
-  if (countriesToShow.length > 10) {
+  if (countriesToShow.length >= 10) {
     return (
       <div>
-        <p>Too many to show</p>
+        <p>Too many matches, specify another filter</p>
+      </div>
+    );
+  } else if (countriesToShow.length === 1) {
+    const countryShow = countriesToShow[0];
+    return (
+      <div>
+        <h1>{countryShow.name.common}</h1>
+        <div>Capital: {countryShow.capital}</div>
+        <div>Area: {countryShow.area}</div>
+
+        <h3>Languages</h3>
+        <ul>
+          {Object.values(countryShow.languages).map((language) => (
+            <li key={language}>{language}</li>
+          ))}
+        </ul>
+        <img src={countryShow.flags.png} alt={countryShow.flags.alt} />
       </div>
     );
   } else {
@@ -55,11 +72,6 @@ const App = () => {
 
   const handleFilter = (event) => {
     setShowFilter(event.target.value);
-    // setCountriesToShow(
-    //   countries.filter((country) =>
-    //     country.name.common.toLowerCase().includes(showFilter.toLowerCase())
-    //   )
-    // );
   };
 
   return (
