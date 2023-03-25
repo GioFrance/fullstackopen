@@ -1,7 +1,9 @@
+import { useState } from "react";
 import CountryList from "./CountryList";
 import CountryInfo from "./CountryInfo";
 
 const Countries = ({ countries, showFilter }) => {
+  const [country, setCountry] = useState("");
   const countriesToShow = countries.filter((country) =>
     country.name.common.toLowerCase().includes(showFilter.toLowerCase())
   );
@@ -24,12 +26,16 @@ const Countries = ({ countries, showFilter }) => {
     );
   } else if (countriesToShow.length === 1) {
     return <CountryInfo countryShow={countriesToShow[0]} />;
-  } else {
+  } else if (countriesToShow.length <= 10) {
     return (
       <div>
         {countriesToShow.map((country) => (
-          <CountryList key={country.name.official} country={country} />
+          <div key={country.name.official}>
+            {country.name.common}
+            <button onClick={() => setCountry(country)}>show</button>
+          </div>
         ))}
+        {country ? <CountryInfo countryShow={country} /> : null}
       </div>
     );
   }
