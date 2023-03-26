@@ -32,7 +32,7 @@ const Countries = ({ countries, showFilter }) => {
         {countriesToShow.map((country) => (
           <div key={country.name.official}>
             {country.name.common}
-            <button onClick={() => setCountry(country)}>show</button>
+            <button onClick={() => setCountry([country])}>show</button>
           </div>
         ))}
         {country ? <CountryInfo countryShow={country} /> : null}
