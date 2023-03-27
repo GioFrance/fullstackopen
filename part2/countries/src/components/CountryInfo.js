@@ -1,4 +1,4 @@
-import WeatherInfo from "./WeatherData";
+import WeatherInfo from "./WeatherInfo";
 
 const CountryInfo = ({ countryShow }) => {
   return (
